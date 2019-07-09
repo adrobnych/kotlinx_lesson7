@@ -1,4 +1,4 @@
-package com.codegemz.kotlinx.lesson7.repository.entity
+package com.codegemz.kotlinx.lesson7.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

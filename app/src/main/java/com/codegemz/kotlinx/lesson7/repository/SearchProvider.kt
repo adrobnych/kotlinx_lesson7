@@ -1,6 +1,6 @@
 package com.codegemz.kotlinx.lesson7.repository
 
-import com.codegemz.kotlinx.lesson7.repository.entity.SearchEntity
+import com.codegemz.kotlinx.lesson7.model.SearchEntity
 import com.codegemz.kotlinx.lesson7.net.response.SearchItem
 import java.util.ArrayList
 

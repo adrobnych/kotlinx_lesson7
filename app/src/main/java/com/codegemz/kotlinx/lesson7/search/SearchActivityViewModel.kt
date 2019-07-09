@@ -1,15 +1,22 @@
 package com.codegemz.kotlinx.lesson7.search
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import android.util.Log
-import com.codegemz.kotlinx.lesson7.App
+import androidx.lifecycle.MutableLiveData
+import com.codegemz.kotlinx.lesson7.base.BaseViewModel
+import com.codegemz.kotlinx.lesson7.model.database.AppDatabase
 import com.codegemz.kotlinx.lesson7.net.response.SearchItem
 import com.codegemz.kotlinx.lesson7.repository.SearchProvider
+import com.codegemz.kotlinx.lesson7.repository.SearchRepository
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class SearchActivityViewModel : ViewModel() {
-    private val dataBase = App.dataBase
-    private val searchRepository = App.searchRepository
+class SearchActivityViewModel : BaseViewModel() {
+    @Inject
+    lateinit var searchRepository: SearchRepository
+    @Inject
+    lateinit var dataBase: AppDatabase
+
     internal val searchResponse = MutableLiveData<List<SearchItem>>()
 
     fun searchRequest(searchString: String) {
@@ -21,6 +28,8 @@ class SearchActivityViewModel : ViewModel() {
         }
 
         val querySearch = searchRepository.querySearch(searchString)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { result ->
                     searchResponse.postValue(result.query.search)

@@ -1,4 +1,4 @@
-package com.codegemz.kotlinx.lesson7.net
+package com.codegemz.kotlinx.lesson7.model
 
 import com.codegemz.kotlinx.lesson7.net.response.SearchItem
 
